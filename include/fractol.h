@@ -5,10 +5,8 @@
 # include "minilibx/mlx.h"
 # include <pthread.h>
 
-# define SIZE 600              // width ve height olarak ayrılabilir
-# define ITERATION 100
-# define THREAD_NUMBER 16  
-# define THREAD_WIDTH (SIZE / THREAD_NUMBER)      
+# define SIZE 600 // EKSI DEĞER VERINCE PATLIYOR !!!!!!! // width ve height olarak ayrılabilir
+// # define ITERATION 100
 
 // KEYCODES
 # define ESC 65307
@@ -23,6 +21,10 @@
 # define P 112
 # define M 109
 
+// MOUSECODES
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
+
 typedef struct s_fractal
 {
 	void	*mlx;
@@ -34,20 +36,39 @@ typedef struct s_fractal
 	int		endian;
 	int		x;
 	int		y;
-	double	zx;
-	double	zy;
-	double	cx;
-	double	cy;
+	double	zr;
+	double	zi;
+	double	cr;
+	double	ci;
 	int		color;
 	double	offset_x;
 	double	offset_y;
 	double	zoom;
 	char	*name;
 	int		max_iterations;
+	int argc;           
+	char **argv;          
+	int julia_params_set; // Julia parametreleri ayarlandı mı?
 }			t_fractal;
 
 int			key_hook(int key_code, t_fractal *fractal);
 void		init_fractal(t_fractal *fractal);
 int			draw_fractal(t_fractal *fractal, char *fractal_name);
-
+// void		mandelbrot_pthread(t_fractal *fractal);
+void		*draw_mandelbrot(void *fractal_void);
+int			key_hook(int key_code, t_fractal *fractal);
+void		init_mlx(t_fractal *fractal);
+void		calculate_mandelbrot(t_fractal *fractal);
+void		put_color_to_pixel(t_fractal *fractal, int x, int y, int color);
+void		zoom(t_fractal *fractal, int x, int y, int zoom);
+int			mouse_hook(int mouse_code, int x, int y, t_fractal *fractal);
+void		calculate_julia(t_fractal *fractal);
+void		draw_julia(t_fractal *fractal);
+void		init_julia(t_fractal *fractal);
+double		ft_atof(const char *str);
+void		*draw_tricorn(void *fractal_void);
+void		calculate_tricorn(t_fractal *fractal);
+int			exit_fractal(t_fractal *fractal);
+int			is_valid_fractal(char *name);
+int			error_message(void);
 #endif

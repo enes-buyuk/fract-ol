@@ -1,16 +1,29 @@
-#include "include/fractol.h"
+#include "../include/fractol.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_fractal *fractal;
+	t_fractal	*fractal;
 
-	if (argc != 2) // buraya düzgün usage message ekle 
+	if (argc < 2 || !is_valid_fractal(argv[1]))
+		return (error_message());
+	if (ft_strncmp(argv[1], "julia", 5) == 0)
 	{
-		ft_putendl_fd("Usage: ./fractol <fractal>", 1);
-		ft_putendl_fd("Available fractals: mandelbrot, julia, burningship", 1);
-		return (0);
+		if (argc != 2 && argc != 4)
+			return (error_message());
 	}
-    fractal = malloc(sizeof(t_fractal));
-    init_fractal(fractal);
-    mlx_key_hook(fractal->window, key_hook, fractal);
+	fractal = malloc(sizeof(t_fractal));
+	if (!fractal)
+		return (1);
+	init_fractal(fractal);
+	fractal->argc = argc;
+	fractal->argv = argv;
+	fractal->julia_params_set = 0;
+	fractal->name = argv[1];
+	init_mlx(fractal);
+	mlx_key_hook(fractal->window, key_hook, fractal);
+	mlx_mouse_hook(fractal->window, mouse_hook, fractal);
+	mlx_hook(fractal->window, 17, 0L, exit_fractal, fractal);
+	draw_fractal(fractal, fractal->name);
+	mlx_loop(fractal->mlx);
+	return (0);
 }
