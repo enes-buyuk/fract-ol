@@ -5,7 +5,8 @@
 # include "minilibx/mlx.h"
 # include <pthread.h>
 
-# define SIZE 600 // EKSI DEĞER VERINCE PATLIYOR !!!!!!! // width ve height olarak ayrılabilir
+# define SIZE 600 // EKSI DEĞER VERINCE PATLIYOR !!!!!!!
+					// width ve height olarak ayrılabilir
 // # define ITERATION 100
 
 // KEYCODES
@@ -46,16 +47,15 @@ typedef struct s_fractal
 	double	zoom;
 	char	*name;
 	int		max_iterations;
-	int argc;           
-	char **argv;          
+	int		argc;
+	char	**argv;
 	int julia_params_set; // Julia parametreleri ayarlandı mı?
 }			t_fractal;
 
 int			key_hook(int key_code, t_fractal *fractal);
 void		init_fractal(t_fractal *fractal);
 int			draw_fractal(t_fractal *fractal, char *fractal_name);
-// void		mandelbrot_pthread(t_fractal *fractal);
-void		*draw_mandelbrot(void *fractal_void);
+void		*draw_mandelbrot(t_fractal *fractal);
 int			key_hook(int key_code, t_fractal *fractal);
 void		init_mlx(t_fractal *fractal);
 void		calculate_mandelbrot(t_fractal *fractal);
@@ -66,7 +66,7 @@ void		calculate_julia(t_fractal *fractal);
 void		draw_julia(t_fractal *fractal);
 void		init_julia(t_fractal *fractal);
 double		ft_atof(const char *str);
-void		*draw_tricorn(void *fractal_void);
+void		*draw_tricorn(t_fractal *fractal);
 void		calculate_tricorn(t_fractal *fractal);
 int			exit_fractal(t_fractal *fractal);
 int			is_valid_fractal(char *name);

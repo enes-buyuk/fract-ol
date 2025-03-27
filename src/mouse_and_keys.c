@@ -24,21 +24,24 @@ int	key_hook(int key_code, t_fractal *fractal)
 	return (0);
 }
 
-void	zoom(t_fractal *fractal, int x, int y, int zoom_direction)
+void	zoom(t_fractal *f, int x, int y, int zoom_direction)
 {
 	double	zoom_level;
 	double	new_zoom;
 
-	zoom_level = 1.50;
-	if (zoom_direction == 1)
-		new_zoom = fractal->zoom * zoom_level;
-	else if (zoom_direction == -1)
-		new_zoom = fractal->zoom / zoom_level;
+	zoom_level = 1.50;   
+	
+	if (zoom_direction == 1)                
+		new_zoom = f->zoom * zoom_level; 
+	else if (zoom_direction == -1)         
+		new_zoom = f->zoom / zoom_level; 
 	else
-		return ;
-	fractal->offset_x += (double)x / fractal->zoom - (double)x / new_zoom;
-	fractal->offset_y += (double)y / fractal->zoom - (double)y / new_zoom;
-	fractal->zoom = new_zoom;
+		return ;                           
+	
+	// Fare konumuna göre offset değerleri güncelle
+	f->offset_x += (double)x / f->zoom - (double)x / new_zoom;
+	f->offset_y += (double)y / f->zoom - (double)y / new_zoom;
+	f->zoom = new_zoom;
 }
 
 int	mouse_hook(int mouse_code, int x, int y, t_fractal *fractal)

@@ -1,24 +1,22 @@
 #include "../include/fractol.h"
 
-void	*draw_tricorn(void *fractal)
+void *draw_tricorn(t_fractal *fractal)
 {
-	t_fractal	*f;
-
-	f = (t_fractal *)fractal;
-	f->name = "tricorn";
-	f->x = 0;
-	f->y = 0;
-	while (f->x < SIZE)
-	{
-		while (f->y < SIZE)
-		{
-			calculate_tricorn(f);
-			f->y++;
-		}
-		f->x++;
-		f->y = 0;
-	}
-	return (NULL);
+    // f değişkenini kullanmaya gerek yok, doğrudan fractal kullanılabilir
+    fractal->name = "tricorn";
+    fractal->x = 0;
+    fractal->y = 0;
+    while (fractal->x < SIZE)
+    {
+        while (fractal->y < SIZE)
+        {
+            calculate_tricorn(fractal);
+            fractal->y++;
+        }
+        fractal->x++;
+        fractal->y = 0;
+    }
+    return (NULL);
 }
 
 void	calculate_tricorn(t_fractal *f)
