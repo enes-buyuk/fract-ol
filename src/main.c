@@ -6,11 +6,6 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || !is_valid_fractal(argv[1]))
 		return (error_message());
-	if (ft_strncmp(argv[1], "julia", 5) == 0)
-	{
-		if (argc != 2 && argc != 4)
-			return (error_message());
-	}
 	fractal = malloc(sizeof(t_fractal));
 	if (!fractal)
 		return (1);

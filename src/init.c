@@ -4,15 +4,12 @@ void	init_fractal(t_fractal *fractal)
 {
 	fractal->x = 0;
 	fractal->y = 0;
-	fractal->color = 0xF3E8CB;  // 0x7B68EE, 0xAFD5AA, 0xF3E8CB, 0x1E90FF
-	
-	// SIZE değerine göre dinamik zoom değeri
+	fractal->color = 0xF3E8CB; // 0x7B68EE, 0xAFD5AA, 0xF3E8CB, 0x1E90FF
 	fractal->zoom = SIZE / 4;
 	
 	// Mandelbrot setinin tamamını görmek için ideal ofset değerleri
-	fractal->offset_x = -2.0;  
+	fractal->offset_x = -2.0;
 	fractal->offset_y = -2.0;
-	
 	fractal->max_iterations = 100;
 }
 

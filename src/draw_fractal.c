@@ -1,5 +1,4 @@
 #include "../include/fractol.h"
-
 #include <stdio.h>
 
 int	draw_fractal(t_fractal *fractal, char *fractal_name)
@@ -10,13 +9,21 @@ int	draw_fractal(t_fractal *fractal, char *fractal_name)
 		init_julia(fractal);
 	else if (ft_strncmp(fractal_name, "tricorn", 7) == 0)
 		draw_tricorn(fractal);
-	
-	mlx_put_image_to_window(fractal->mlx, fractal->window, fractal->image, 0, 0);
+	mlx_put_image_to_window(fractal->mlx, fractal->window, fractal->image, 0,
+		0);
 	return (0);
 }
 
 void	init_julia(t_fractal *fractal)
 {
+	if (ft_strncmp(fractal->name, "julia", 5) == 0)
+	{
+		if (fractal->argc != 2 && fractal->argc != 4)
+		{
+			error_message();
+			exit_fractal(fractal);
+		}
+	}
 	if (fractal->julia_params_set != 1)
 	{
 		if (fractal->argc == 4)
@@ -26,8 +33,8 @@ void	init_julia(t_fractal *fractal)
 		}
 		else
 		{
-			fractal->cr = -0.745429;
-			fractal->ci = 0.05;
+			fractal->cr = 0.285;
+			fractal->ci = 0.01;
 		}
 		fractal->julia_params_set = 1;
 	}
